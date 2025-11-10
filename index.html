@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Srijan Pathak — Courses & eBooks</title>
+<meta name="description" content="Buy courses by Srijan Pathak - SEO, Affiliate Marketing, Earn Money, Website & Apps" />
+<style>
+  :root{
+    --bg:#071428; --card:#081425; --muted:#9fb0c6; --accent:#06b6d4;
+    --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,#051022 0%,#07192b 100%);color:#e6f2fb;padding:24px}
+  .container{max-width:1100px;margin:0 auto}
+  header{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+  .avatar{width:120px;height:120px;border-radius:12px;overflow:hidden;border:3px solid rgba(255,255,255,0.04);background:#0b1220;flex-shrink:0}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  h1{margin:0;font-size:22px}
+  .lead{color:var(--muted);margin-top:6px}
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:20px}
+  .card{background:var(--card);padding:16px;border-radius:12px}
+  .courses .course{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;margin-bottom:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+  .course .meta{max-width:65%}
+  .price{font-weight:800}
+  .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:#032022;text-decoration:none;font-weight:700;border:none;cursor:pointer}
+  .muted{color:var(--muted);font-size:14px}
+  label{display:block;margin-top:8px;color:var(--muted);font-size:13px}
+  input[type="text"], input[type="email"], textarea, select{width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit}
+  .chatbox{height:300px;overflow:auto;padding:10px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);display:flex;flex-direction:column}
+  .msg{margin:6px 0;padding:8px;border-radius:8px;max-width:80%}
+  .msg.me{align-self:flex-end;background:rgba(6,182,212,0.12)}
+  .msg.you{align-self:flex-start;background:rgba(255,255,255,0.03)}
+  .small{font-size:13px;color:var(--muted)}
+  footer{margin-top:16px;color:var(--muted);text-align:center;font-size:13px}
+  .qr{width:100%;border-radius:8px;display:block;margin-top:8px}
+  .row{display:flex;gap:8px}
+  .row .flex{flex:1}
+  .admin{background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);padding:12px;border-radius:8px;margin-top:12px}
+  .notice{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;margin-top:8px;color:var(--muted);font-size:13px}
+  @media (max-width:980px){
+    .grid{grid-template-columns:1fr}
+    .avatar{width:96px;height:96px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="avatar" id="avatarWrap">
+      <!-- Profile image will be set by JS; place your profile photo in same folder as 'profile.jpg' or named 'image.jpeg' etc -->
+      <img id="profileImg" src="" alt="Profile image">
+    </div>
+    <div>
+      <h1 id="ownerName">Srijan Pathak</h1>
+      <div class="lead">Teaching practical knowledge: SEO, Affiliate Marketing, Earning online, Website & Apps development.</div>
+      <div class="small" style="margin-top:8px">Email: <strong id="ownerEmail">srijanrgm123@gmail.com</strong></div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <main>
+      <section class="card courses">
+        <h2>Courses for sale</h2>
+        <p class="muted">Select a course and follow instructions. Price displayed below. You must send the payment screenshot in the chat box and paste the transaction ID to unlock downloads. We guarantee education & knowledge but not specific earnings.</p>
+
+        <!-- Course list -->
+        <div id="courseList" style="margin-top:8px">
+          <!-- JS will populate courses -->
+        </div>
+
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0" />
+
+        <div class="notice">
+          <strong>Important notes:</strong><br>
+          - We do NOT guarantee you will earn money; we guarantee educational content and guidance. Results depend on your effort and research.<br>
+          - After payment, send the <strong>payment screenshot</strong> in the chat box and paste your transaction ID in the verification box below.<br>
+          - I (Srijan) will confirm and then PDFs will be unlocked. You will also receive eBook(s) by email once confirmed.
+        </div>
+
+        <div style="margin-top:12px">
+          <label>Selected course:</label>
+          <select id="selectedCourse"></select>
+
+          <label>Transaction ID (paste after payment):</label>
+          <input id="txnInput" type="text" placeholder="Transaction / reference ID">
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button class="btn" onclick="verifyPayment()">Verify & Unlock</button>
+            <button class="btn" style="background:rgba(255,255,255,0.06);color:var(--muted)" onclick="resetAll()">Reset (demo)</button>
+          </div>
+
+          <div id="verifyMsg" class="muted" style="margin-top:8px"></div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h3>Contact / Quick email</h3>
+        <p class="muted">Contact before payment if you prefer. Clicking contact will open your email app (mailto:).</p>
+        <label>Your name</label>
+        <input id="contactName" type="text" placeholder="Your name">
+        <label>Your email</label>
+        <input id="contactEmail" type="email" placeholder="Your email">
+        <label>Message</label>
+        <textarea id="contactMsg" rows="4" placeholder="Write a short message (which course, questions..)"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn" onclick="openMail()">Contact Srijan (email)</button>
+          <button class="btn" style="background:rgba(255,255,255,0.06);color:var(--muted)" onclick="markContacted()">I have contacted</button>
+        </div>
+        <div class="muted" style="margin-top:8px">Email: <strong>srijanrgm123@gmail.com</strong></div>
+      </section>
+
+      <section class="card" style="margin-top:12px">
+        <h3>Admin: Upload course PDFs (client-side)</h3>
+        <p class="muted">This demo allows you to upload PDFs in the browser (stored locally). Use admin password to reveal upload controls. Uploaded PDFs will be stored in your browser and available to unlocked users.</p>
+        <div class="admin">
+          <label>Admin password</label>
+          <input id="adminPass" type="password" placeholder="Enter admin password">
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" onclick="unlockAdmin()">Unlock Admin</button>
+            <button class="btn" style="background:rgba(255,255,255,0.06);color:var(--muted)" onclick="lockAdmin()">Lock Admin</button>
+          </div>
+
+          <div id="adminControls" style="display:none;margin-top:12px">
+            <label>Choose course to attach PDF</label>
+            <select id="adminCourse"></select>
+            <label>Choose PDF file</label>
+            <input type="file" id="pdfFile" accept="application/pdf">
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn" onclick="uploadPDF()">Upload PDF</button>
+              <button class="btn" style="background:rgba(255,255,255,0.06);color:var(--muted)" onclick="clearPDFs()">Clear all PDFs (local)</button>
+            </div>
+            <div class="small" style="margin-top:8px">Admin password (client-only) is: <strong>srijanadmin</strong> (change later if desired)</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside>
+      <div class="card">
+        <h3>Payment (eSewa QR)</h3>
+        <p class="muted">Scan this QR to pay the course fee. After paying, send the payment screenshot in the chat (below) and paste the transaction ID above.</p>
+        <!-- QR image will be set by JS; place either qrcode.jpg or the provided image name in same folder -->
+        <img id="qrImg" class="qr" src="" alt="Payment QR (place qrcode.jpg or provided QR image in same folder)">
+        <div class="small" style="margin-top:8px">Phone/ID in QR may contain phone number — please pay carefully. Contact: <strong>srijanrgm123@gmail.com</strong></div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Chatbox (send message & payment screenshot)</h3>
+        <div id="chat" class="chatbox"></div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input id="chatInput" class="flex" placeholder="Write message or 'I paid for COURSE_NAME'">
+          <input id="fileAttach" type="file" accept="image/*,application/pdf" style="width:120px">
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn" onclick="sendChat()">Send</button>
+          <button class="btn" style="background:rgba(255,255,255,0.06);color:var(--muted)" onclick="clearChat()">Clear chat</button>
+          <button class="btn" onclick="emailChat()">Send chat to email</button>
+        </div>
+        <div class="small" style="margin-top:8px">After payment, <strong>send payment screenshot</strong> here and paste transaction ID above. I will confirm and unlock downloads.</div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <h3>Downloaded / unlocked</h3>
+        <div id="downloads" class="muted">No downloads available yet.</div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div>Thank you for visiting. Made by <strong>Srijan Pathak</strong> with the help of social media & AI.</div>
+  </footer>
+</div>
+
+<script>
+/* -------------------------
+  Data: courses and prices
+   ------------------------- */
+const COURSES = [
+  { id: 'c1', title: 'Learn about SEO', price: 399, slug: 'seo' },
+  { id: 'c2', title: 'Affiliate Marketing', price: 299, slug: 'affiliate' },
+  { id: 'c3', title: 'How to Earn Money', price: 599, slug: 'earn' },
+  { id: 'c4', title: 'Website & Apps Development', price: 999, slug: 'webapps' }
+];
+
+const OWNER_EMAIL = 'srijanrgm123@gmail.com';
+const OWNER_NAME = 'Srijan Pathak';
+const ADMIN_PASSWORD = 'srijanadmin'; // client-only demo - change if needed
+
+/* -------------------------
+  Utility: load profile & QR images
+   ------------------------- */
+const profileCandidates = ['profile.jpg','profile.png','image.gpeg','image.jpeg','image.jpeg.jpeg','image (2).jpeg'];
+const qrCandidates = ['qrcode.jpg','qrcode.png','image_qr.jpg','image.jpeg','image.jpeg.jpeg','/mnt/data/image.jpeg.jpeg','/mnt/data/image.jpeg (2).jpeg'];
+
+function setFirstWorkingImage(imgEl, candidates, fallbackAlt){
+  let i=0;
+  function tryNext(){
+    if(i>=candidates.length){ imgEl.alt = fallbackAlt; return; }
+    const src = candidates[i++];
+    // Create tester image to check existence
+    const tester = new Image();
+    tester.onload = ()=>{ imgEl.src = src; };
+    tester.onerror = ()=>{ tryNext(); };
+    tester.src = src;
+  }
+  tryNext();
+}
+
+document.getElementById('ownerName').textContent = OWNER_NAME;
+document.getElementById('ownerEmail').textContent = OWNER_EMAIL;
+
+setFirstWorkingImage(document.getElementById('profileImg'), profileCandidates, 'Profile (add profile.jpg)');
+setFirstWorkingImage(document.getElementById('qrImg'), qrCandidates, 'QR (add qrcode.jpg)');
+
+/* -------------------------
+  Render course list and selects
+   ------------------------- */
+function renderCourses(){
+  const list = document.getElementById('courseList');
+  const sel = document.getElementById('selectedCourse');
+  const adminSel = document.getElementById('adminCourse');
+  list.innerHTML = ''; sel.innerHTML = ''; adminSel.innerHTML = '';
+  COURSES.forEach(c=>{
+    // course row
+    const row = document.createElement('div');
+    row.className = 'course';
+    row.innerHTML = `
+      <div class="meta">
+        <div><strong>${c.title}</strong></div>
+        <div class="muted">Comprehensive course on ${c.title.toLowerCase()}.</div>
+      </div>
+      <div style="text-align:right">
+        <div class="price">Rs ${c.price}</div>
+        <div style="margin-top:6px">
+          <button class="btn" onclick="selectCourse('${c.id}')">Buy / Pay</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(row);
+
+    // add to selects
+    const opt = document.createElement('option'); opt.value = c.id; opt.textContent = `${c.title} — Rs ${c.price}`;
+    sel.appendChild(opt);
+    const opt2 = opt.cloneNode(true); adminSel.appendChild(opt2);
+  });
+}
+renderCourses();
+
+function selectCourse(id){
+  document.getElementById('selectedCourse').value = id;
+  alert('Selected course. Please scan the QR to pay and then send payment screenshot in the chat box and paste transaction ID in the verification box above.');
+}
+
+/* -------------------------
+ Chatbox: local storage messages + file attachments
+ ------------------------- */
+const CHAT_KEY = 'srijan_site_chat_v1';
+function getChat(){ return JSON.parse(localStorage.getItem(CHAT_KEY) || '[]'); }
+function saveChat(msgs){ localStorage.setItem(CHAT_KEY, JSON.stringify(msgs)); }
+
+function renderChat(){
+  const chat = document.getElementById('chat');
+  chat.innerHTML = '';
+  const msgs = getChat();
+  msgs.forEach(m=>{
+    const d = document.createElement('div');
+    d.className = 'msg ' + (m.me ? 'me' : 'you');
+    if(m.type === 'text'){ d.textContent = (m.me? 'You: ':'Srijan: ') + m.text; }
+    else if(m.type === 'image'){
+      const caption = document.createElement('div'); caption.className='small muted'; caption.textContent = (m.me? 'You sent an image':'Image:');
+      const img = document.createElement('img'); img.src = m.data; img.style.maxWidth='220px'; img.style.borderRadius='6px'; img.style.display='block'; img.style.marginTop='6px';
+      d.appendChild(caption); d.appendChild(img);
+      if(m.txn) { const tx = document.createElement('div'); tx.className='small'; tx.textContent = 'Txn ID: '+m.txn; d.appendChild(tx); }
+    } else if(m.type === 'pdf'){
+      const link = document.createElement('a'); link.href = m.data; link.download = m.name || 'file.pdf'; link.textContent = (m.me? 'You uploaded: ':'Uploaded: ')+ (m.name || 'file.pdf'); link.className='small';
+      d.appendChild(link);
+    } else {
+      d.textContent = (m.me? 'You: ':'Srijan: ') + (m.text || '');
+    }
+    chat.appendChild(d);
+  });
+  chat.scrollTop = chat.scrollHeight;
+}
+
+// Send chat message (text or with attachment)
+async function sendChat(){
+  const input = document.getElementById('chatInput');
+  const fileInput = document.getElementById('fileAttach');
+  const text = input.value.trim();
+  const file = fileInput.files[0];
+  const msgs = getChat();
+
+  if(!text && !file){ return alert('Write a message or attach a payment screenshot to send.'); }
+
+  if(file){
+    // If image or pdf, convert to base64 data URL and store
+    const data = await toDataURL(file);
+    if(file.type === 'application/pdf'){
+      msgs.push({ type:'pdf', me:true, name:file.name, data, ts:Date.now() });
+    } else {
+      // image: treat as payment screenshot if user indicates "payment" in message or always prompt
+      // We'll store and if txn is present or text contains "paid", it will be used in verify
+      msgs.push({ type:'image', me:true, text, data, ts:Date.now() });
+      // We also auto-insert a system reply reminding to paste txn id
+      msgs.push({ type:'text', me:false, text: 'Thanks — please paste your transaction ID above (Transaction ID box) and press Verify & Unlock after sending the screenshot.', ts:Date.now()+50 });
+    }
+  } else {
+    msgs.push({ type:'text', me:true, text, ts:Date.now() });
+  }
+
+  saveChat(msgs);
+  input.value=''; fileInput.value='';
+  renderChat();
+}
+
+// convert file to data URL
+function toDataURL(file){ return new Promise((res, rej)=>{
+  const reader = new FileReader();
+  reader.onload = ()=> res(reader.result);
+  reader.onerror = rej;
+  reader.readAsDataURL(file);
+}); }
+
+function clearChat(){ if(confirm('Clear local chat?')){ localStorage.removeItem(CHAT_KEY); renderChat(); } }
+function emailChat(){
+  const msgs = getChat();
+  if(!msgs.length) return alert('No chat to send.');
+  const body = msgs.map(m=>{
+    if(m.type === 'text') return (m.me? 'You: ':'Srijan: ') + m.text;
+    if(m.type === 'image') return (m.me? 'You sent image.':'Image sent.') + (m.txn? ' Txn:'+m.txn : '');
+    if(m.type === 'pdf') return (m.me? 'You uploaded PDF: ':'PDF uploaded: ') + m.name;
+    return JSON.stringify(m);
+  }).join('\n');
+  const mailto = `mailto:${encodeURIComponent(OWNER_EMAIL)}?subject=${encodeURIComponent('Chat from website')}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
+}
+
+/* -------------------------
+  Simple local payment verification logic
+  - On verify: check if a chat image was recently sent and a txn is provided; mark course as paid locally
+  - Paid courses saved in localStorage by course id
+ ------------------------- */
+
+const PAID_KEY = 'srijan_site_paid_v1'; // stores { courseId: { txn, ts, proofData } }
+function getPaid(){ return JSON.parse(localStorage.getItem(PAID_KEY) || '{}'); }
+function setPaid(obj){ localStorage.setItem(PAID_KEY, JSON.stringify(obj)); }
+
+function verifyPayment(){
+  const sel = document.getElementById('selectedCourse').value;
+  const txn = document.getElementById('txnInput').value.trim();
+  if(!sel){ return alert('Select a course first.'); }
+  if(!txn){ document.getElementById('verifyMsg').textContent = 'Please paste your transaction ID/reference and send payment screenshot in chat.'; return; }
+
+  // find last image in chat (assume it's payment screenshot)
+  const msgs = getChat().slice().reverse();
+  const imgMsg = msgs.find(m=> m.type === 'image' && m.me);
+  if(!imgMsg){
+    document.getElementById('verifyMsg').textContent = 'No payment screenshot found in chat. Please upload payment screenshot in the chat box.';
+    return;
+  }
+
+  // mark as paid (demo: accept any txn)
+  const paid = getPaid();
+  paid[sel] = { txn, ts: Date.now(), proof: imgMsg.data };
+  setPaid(paid);
+  document.getElementById('verifyMsg').textContent = `Payment recorded locally for "${courseTitle(sel)}". Downloads unlocked for this browser.`;
+  updateDownloads();
+  // append chat confirmation
+  const chatMsgs = getChat();
+  chatMsgs.push({ type:'text', me:false, text:`Payment received for "${courseTitle(sel)}" with txn ${txn}. Srijan will confirm and may email the PDF.`, ts:Date.now() });
+  saveChat(chatMsgs);
+  renderChat();
+}
+
+function courseTitle(id){ const c = COURSES.find(x=>x.id===id); return c ? c.title : id; }
+
+/* -------------------------
+  Admin: upload course PDFs (stored as base64 in localStorage)
+ ------------------------- */
+const PDF_KEY = 'srijan_site_pdfs_v1'; // { courseId: { name, data } }
+function getPDFs(){ return JSON.parse(localStorage.getItem(PDF_KEY) || '{}'); }
+function setPDFs(obj){ localStorage.setItem(PDF_KEY, JSON.stringify(obj)); }
+
+function unlockAdmin(){
+  const pass = document.getElementById('adminPass').value;
+  if(pass !== ADMIN_PASSWORD){ return alert('Wrong admin password (demo).'); }
+  document.getElementById('adminControls').style.display = 'block';
+  alert('Admin unlocked (client-side). You can upload PDFs now.');
+}
+
+function lockAdmin(){
+  document.getElementById('adminControls').style.display = 'none';
+  document.getElementById('adminPass').value = '';
+}
+
+async function uploadPDF(){
+  const course = document.getElementById('adminCourse').value;
+  const file = document.getElementById('pdfFile').files[0];
+  if(!course || !file) return alert('Choose a course and a PDF file.');
+  if(file.type !== 'application/pdf') return alert('Please upload a PDF.');
+  const data = await toDataURL(file);
+  const pdfs = getPDFs();
+  pdfs[course] = { name: file.name, data };
+  setPDFs(pdfs);
+  alert('PDF uploaded and stored locally in your browser. Paid users on this browser will be able to download it after verification.');
+  updateDownloads();
+}
+
+function clearPDFs(){ if(confirm('Clear all stored PDFs (local)?')){ localStorage.removeItem(PDF_KEY); updateDownloads(); } }
+
+/* -------------------------
+  Show downloads to paid users
+ ------------------------- */
+function updateDownloads(){
+  const downloadsDiv = document.getElementById('downloads');
+  const pdfs = getPDFs();
+  const paid = getPaid();
+  downloadsDiv.innerHTML = '';
+  let any=false;
+  COURSES.forEach(c=>{
+    const row = document.createElement('div');
+    row.style.marginBottom = '8px';
+    const title = document.createElement('div'); title.innerHTML = `<strong>${c.title}</strong> — Rs ${c.price}`;
+    row.appendChild(title);
+    const info = document.createElement('div'); info.className='small';
+    if(paid[c.id]){
+      // Paid: allow download if PDF exists
+      if(pdfs[c.id]){
+        const a = document.createElement('a'); a.href = pdfs[c.id].data; a.download = pdfs[c.id].name; a.className='btn'; a.style.marginTop='6px';
+        a.textContent = 'Download eBook';
+        row.appendChild(a);
+        any=true;
+      } else {
+        info.textContent = 'Payment recorded, but eBook not uploaded by admin yet. You will receive it by email or when uploaded.';
+        row.appendChild(info);
+        any=true;
+      }
+    } else {
+      info.textContent = 'Locked until payment and verification.';
+      row.appendChild(info);
+    }
+    downloadsDiv.appendChild(row);
+  });
+  if(!any) downloadsDiv.textContent = 'No downloads available yet. Make payment and verify to unlock downloads.';
+}
+
+/* -------------------------
+  Helper: contact/open mail & mark contacted
+ ------------------------- */
+function openMail(){
+  const name = encodeURIComponent(document.getElementById('contactName').value || '');
+  const email = encodeURIComponent(document.getElementById('contactEmail').value || '');
+  const msg = encodeURIComponent(document.getElementById('contactMsg').value || '');
+  const body = encodeURIComponent('Name: ' + (name? decodeURIComponent(name): '') + '\\nEmail: ' + (email? decodeURIComponent(email): '') + '\\n\\n' + (msg? decodeURIComponent(msg): ''));
+  window.location.href = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent('Contact from website')}&body=${body}`;
+}
+function markContacted(){ localStorage.setItem('srijan_contacted_v1','true'); alert('Marked as contacted. Please proceed with payment and send screenshot in chat.'); }
+
+/* -------------------------
+  Reset (demo)
+ ------------------------- */
+function resetAll(){ if(!confirm('Reset local demo data (paid status, pdfs, chat)?')) return; localStorage.removeItem(PAID_KEY); localStorage.removeItem(PDF_KEY); localStorage.removeItem(CHAT_KEY); document.getElementById('verifyMsg').textContent=''; updateDownloads(); renderChat(); }
+
+/* -------------------------
+  Init
+ ------------------------- */
+renderChat();
+updateDownloads();
+
+/* Pre-fill selects */
+document.getElementById('selectedCourse').value = COURSES[0].id;
+
+/* Optional: if any stored PDFs exist we already populated downloads above */
+</script>
+</body>
+</html>
